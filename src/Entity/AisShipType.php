@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AisShipTypeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\AbstractType;
@@ -10,7 +12,7 @@ use Symfony\Component\Form\AbstractType;
 /**
  * @ORM\Entity(repositoryClass=AisShipTypeRepository::class)
  */
-class AisShipTypeType extends AbstractType
+class AisShipType extends AbstractType
 {
     /**
      * @ORM\Id
