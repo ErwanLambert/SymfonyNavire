@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 
 /**
  * @ORM\Entity(repositoryClass=AisShipTypeRepository::class)
+ * @ORM\Table(name="aisShipType")
  */
 class AisShipType extends AbstractType
 {
