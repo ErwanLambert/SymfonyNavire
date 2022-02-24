@@ -4,12 +4,13 @@ namespace App\Entity;
 
 use App\Repository\PaysRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PaysRepository::class)
  * @ORM\Table(
  *      name="pays" ,
- *      uniqueConstraints={@ORM\UniqueConstraints(name="indicatif_unique",columns={"indicatif"})},
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="indicatif_unique",columns={"indicatif"})},
  *      indexes={@ORM\Index(name="ind_indicatif", columns={"indicatif})}
  *      )
  */
