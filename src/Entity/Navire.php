@@ -65,6 +65,12 @@ class Navire
      * @ORM\JoinColumn(name="idpays", nullable=false)
      */
     private $lePavillon;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Port::class, inversedBy="naviresAttendus", cascade={"persist"})
+     * @ORM\JoinColumn(name="idportdestination", nullable=true)
+     */
+    private $portDestination;
     
     public function getId(): ?int
     {
@@ -151,6 +157,18 @@ class Navire
     public function setLePavillon(?Pays $lePavillon): self
     {
         $this->lePavillon = $lePavillon;
+
+        return $this;
+    }
+
+    public function getPortDestination(): ?Port
+    {
+        return $this->portDestination;
+    }
+
+    public function setPortDestination(?Port $portDestination): self
+    {
+        $this->portDestination = $portDestination;
 
         return $this;
     }
