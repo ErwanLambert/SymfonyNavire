@@ -35,7 +35,7 @@ class Escale
 
     /**
      * @ORM\ManyToOne(targetEntity=Port::class, inversedBy="lesEscales")
-     * @ORM\JoinColumn(nullable=false , name="idport")
+     * @ORM\JoinColumn(nullable=false , name="idPort")
      */
     private $lePort;
 

@@ -58,7 +58,7 @@ class Navire
 
     /**
      * @ORM\ManyToOne(targetEntity=AisShipType::class, inversedBy="no")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, name="idAisShipType")
      */
     private $leType;
 

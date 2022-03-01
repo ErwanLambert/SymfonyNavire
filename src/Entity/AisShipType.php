@@ -28,7 +28,7 @@ class AisShipType extends AbstractType
     private $libelle;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="aisshiptype")
      * @Assert\Length(min=1,
      *          max=9,
      *          minMessage = "Le type d'un navire est compris entre 1 et 9",
