@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PortRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -41,6 +43,16 @@ class Port
      */
     private $lePays;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=AisShipType::class, mappedBy="lesPorts")
+     */
+    private $lesTypes;
+
+    public function __construct()
+    {
+        $this->lesTypes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +90,33 @@ class Port
     public function setLePays(?Pays $lePays): self
     {
         $this->lePays = $lePays;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AisShipType>
+     */
+    public function getLesTypes(): Collection
+    {
+        return $this->lesTypes;
+    }
+
+    public function addLesType(AisShipType $lesType): self
+    {
+        if (!$this->lesTypes->contains($lesType)) {
+            $this->lesTypes[] = $lesType;
+            $lesType->addLesPort($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesType(AisShipType $lesType): self
+    {
+        if ($this->lesTypes->removeElement($lesType)) {
+            $lesType->removeLesPort($this);
+        }
 
         return $this;
     }
