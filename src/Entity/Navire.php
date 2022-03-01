@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\NavireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -71,6 +73,16 @@ class Navire
      * @ORM\JoinColumn(name="idportdestination", nullable=true)
      */
     private $portDestination;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Escale::class, mappedBy="leNavire", orphanRemoval=true)
+     */
+    private $lesEscales;
+
+    public function __construct()
+    {
+        $this->lesEscales = new ArrayCollection();
+    }
     
     public function getId(): ?int
     {
@@ -169,6 +181,36 @@ class Navire
     public function setPortDestination(?Port $portDestination): self
     {
         $this->portDestination = $portDestination;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Escale>
+     */
+    public function getLesEscales(): Collection
+    {
+        return $this->lesEscales;
+    }
+
+    public function addLesEscale(Escale $lesEscale): self
+    {
+        if (!$this->lesEscales->contains($lesEscale)) {
+            $this->lesEscales[] = $lesEscale;
+            $lesEscale->setLeNavire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesEscale(Escale $lesEscale): self
+    {
+        if ($this->lesEscales->removeElement($lesEscale)) {
+            // set the owning side to null (unless already changed)
+            if ($lesEscale->getLeNavire() === $this) {
+                $lesEscale->setLeNavire(null);
+            }
+        }
 
         return $this;
     }
