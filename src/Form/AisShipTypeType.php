@@ -12,9 +12,9 @@ class AisShipTypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('libelle')
             ->add('aisShipType')
-            ->add('lesPorts')
+            ->add('libelle')
+            //->add('lesPorts')
         ;
     }
 
